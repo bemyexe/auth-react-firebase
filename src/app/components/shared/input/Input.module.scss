@@ -1,0 +1,50 @@
+.input-component {
+  justify-content: space-between;
+
+  .input-title {
+    height: auto;
+    width: auto;
+  }
+
+  .input-icon {
+    position: absolute;
+    top: 27%;
+    right: 0%;
+    transform: translateY(-18.5%);
+    transform: translateX(-50%);
+  }
+
+  .input-field {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px var(--gray-300);
+    padding: 10px;
+    gap: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 0 0 1px var(--gray-500);
+    }
+
+    &:focus-within {
+      box-shadow: 0 0 0 1px var(--blue-300);
+    }
+
+    &.disabled {
+      background-color: var(--gray-100);
+      box-shadow: none;
+    }
+  }
+
+  .input-field ::placeholder {
+    color: var(--gray-200);
+  }
+
+  .input-text {
+    width: 95%;
+    height: 20px;
+  }
+}
