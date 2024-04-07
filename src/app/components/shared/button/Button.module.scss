@@ -1,0 +1,119 @@
+@import "src/styles/colors.scss";
+
+$style-types: ("filled", "outlined", "translucent", "transparent");
+
+@mixin button-styles {
+  @each $style-type in $style-types {
+    @each $color, $color-shades in $palettes {
+      &.#{$style-type}.#{$color} {
+        @if $style-type == "filled" {
+          @include filled($color-shades);
+        }
+        @if $style-type == "outlined" {
+          @include outlined($color-shades);
+        }
+        @if $style-type == "translucent" {
+          @include translucent($color-shades);
+        }
+        @if $style-type == "transparent" {
+          @include transparent($color-shades);
+        }
+      }
+    }
+  }
+}
+
+@mixin filled($color) {
+  color: var(--gray-25);
+  background-color: map-get($color, 500);
+
+  &:hover {
+    background-color: map-get($color, 600);
+  }
+
+  &:active {
+    background-color: map-get($color, 700);
+  }
+
+  &:disabled {
+    background-color: var(--gray-400);
+    color: var(--gray-700);
+  }
+}
+
+@mixin outlined($color) {
+  color: map-get($color, 500);
+  box-shadow: 0 0 0 1px map-get($color, 500);
+
+  &:hover {
+    color: map-get($color, 600);
+    box-shadow: 0 0 0 1px map-get($color, 600);
+  }
+
+  &:active {
+    color: map-get($color, 700);
+    box-shadow: 0 0 0 1px map-get($color, 700);
+  }
+
+  &:disabled {
+    color: var(--gray-700);
+    box-shadow: 0 0 0 1px var(--gray-700);
+  }
+}
+
+@mixin translucent($color) {
+  color: map-get($color, 500);
+  background-color: map-get($color, 50);
+
+  &:hover {
+    background-color: map-get($color, 200);
+  }
+
+  &:active {
+    background-color: map-get($color, 300);
+  }
+
+  &:disabled {
+    background-color: var(--gray-400);
+    color: var(--gray-700);
+  }
+}
+
+@mixin transparent($color) {
+  color: map-get($color, 500);
+
+  &:hover {
+    color: map-get($color, 600);
+  }
+
+  &:active {
+    color: map-get($color, 700);
+  }
+
+  &:disabled {
+    color: var(--gray-700);
+  }
+}
+
+.button {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 8px;
+  border-radius: 5px;
+  transition: all 1s;
+
+  &.s {
+    padding: 8px 12px;
+  }
+
+  &.m {
+    padding: 10px 14px;
+  }
+
+  &.l {
+    padding: 10px 16px;
+  }
+
+  @include button-styles();
+}
