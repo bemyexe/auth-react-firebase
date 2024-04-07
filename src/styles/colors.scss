@@ -1,0 +1,36 @@
+$palettes: (
+  "blue": (
+    25: #ebecfa,
+    50: #d7daf5,
+    100: #c3c7f0,
+    200: #afb5eb,
+    300: #8890e1,
+    400: #606bd7,
+    500: #3846cd,
+    600: #2d38a4,
+    700: #222a7b,
+    800: #11153d,
+    900: #0b0e29,
+  ),
+  "gray": (
+    25: #ffffff,
+    50: #f0f1f3,
+    100: #e0e2e7,
+    200: #d1d4da,
+    300: #c2c6ce,
+    400: #a3a9b6,
+    500: #858d9d,
+    600: #667085,
+    700: #525a6a,
+    800: #292d35,
+    900: #000000,
+  ),
+);
+
+:root {
+  @each $color-name, $color-shades in $palettes {
+    @each $shade, $value in $color-shades {
+      --#{$color-name}-#{$shade}: #{$value};
+    }
+  }
+}
