@@ -1,0 +1,18 @@
+.loader {
+  width: 30px;
+  padding: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--gray-100);
+  --tube: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--tube);
+  mask: var(--tube);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
