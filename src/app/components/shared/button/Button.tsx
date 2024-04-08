@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import Loader from "../loader/Loader";
-import "./Button.module.scss";
+import "./Button.scss";
 
 type ButtonSize = "s" | "m" | "l";
 

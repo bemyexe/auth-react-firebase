@@ -2,8 +2,8 @@ import React, { ChangeEvent, useMemo, useState } from "react";
 import classnames from "classnames";
 import { v4 as uuidv4 } from "uuid";
 
-import "./Input.module.scss";
-import { TextMRegular } from "../typography/Typography";
+import "./Input.scss";
+import { TextLSemibold } from "../typography/Typography";
 import { Icons } from "../icon/enum/icon-enum";
 import { Icon } from "../icon/Icon";
 
@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="input-component">
       <label htmlFor={uniqueId} className="input-title">
-        <TextMRegular>{title}</TextMRegular>
+        <TextLSemibold>{title}</TextLSemibold>
       </label>
       <div className={classnames("input-field", { disabled })}>
         <input
