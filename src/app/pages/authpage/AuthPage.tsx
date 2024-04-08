@@ -5,7 +5,6 @@ import Button from "../../components/shared/button/Button";
 import { useDispatch } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../store/slices/user-slices";
-import classes from "./AuthPage.module.scss";
 import {
   TextLLight,
   TextLSemibold,
@@ -35,7 +34,7 @@ const Authpage = () => {
   };
 
   return (
-    <div className={classes.authContent}>
+    <>
       <TextLSemibold>Auth</TextLSemibold>
       <Input
         title="Email Address"
@@ -62,7 +61,7 @@ const Authpage = () => {
         children={<Link to="/signup">Create Account</Link>}
         title="create account"
       />
-    </div>
+    </>
   );
 };
 
