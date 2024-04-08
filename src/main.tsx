@@ -9,6 +9,10 @@ import { store } from "./app/store/index.ts";
 
 import "./firebase.js";
 
+import "./styles/global-styles.scss";
+import "./styles/colors.scss";
+import SecuredRoute from "./app/routes/secured-routes/SecuredRoute.tsx";
+
 const router = createBrowserRouter([
   {
     path: "auth",
@@ -16,7 +20,11 @@ const router = createBrowserRouter([
   },
   {
     path: "home",
-    element: <Homepage />,
+    element: (
+      <SecuredRoute>
+        <Homepage />
+      </SecuredRoute>
+    ),
   },
   {
     path: "signup",
