@@ -6,6 +6,9 @@
   justify-content: center;
   align-items: center;
   .signup-content {
+    padding: 15px;
+    border: 1px solid var(--blue-700);
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -19,6 +22,8 @@
       margin: 10px 0;
     }
     .signup-question {
+      display: flex;
+      justify-content: center;
       min-width: 220px;
     }
   }

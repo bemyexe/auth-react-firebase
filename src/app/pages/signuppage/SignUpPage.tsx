@@ -14,24 +14,29 @@ import "./SignUp.scss";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
   const handleRegister = (email: string, password: string) => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(
-          setUser({
-            email: user.email,
-            id: user.uid,
-            token: user.refreshToken,
-          })
-        );
-        navigate("/home");
-      })
-      .catch(console.error);
+    setLoading(true);
+    setTimeout(() => {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid,
+              token: user.refreshToken,
+            })
+          );
+          navigate("/home");
+        })
+        .catch(console.error)
+        .finally(() => setLoading(false));
+    }, 1000);
   };
 
   return (
@@ -55,9 +60,10 @@ const SignUp = () => {
           className="signup-button"
           onClick={() => handleRegister(email, pass)}
           children={"Sign up"}
-          title={"title2"}
+          title={"Sign up"}
+          loading={loading}
         />
-        <TextLLight className="signup-question ">
+        <TextLLight className="signup-question">
           Already have an account?
         </TextLLight>
         <Button

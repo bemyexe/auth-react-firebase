@@ -15,24 +15,29 @@ import "./AuthPage.scss";
 const Authpage = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
   const handleLogin = (email: string, password: string) => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(
-          setUser({
-            email: user.email,
-            id: user.uid,
-            token: user.refreshToken,
-          })
-        );
-        navigate("/home");
-      })
-      .catch(console.error);
+    setLoading(true);
+    setTimeout(() => {
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid,
+              token: user.refreshToken,
+            })
+          );
+          navigate("/home");
+        })
+        .catch(console.error)
+        .finally(() => setLoading(false));
+    }, 1000);
   };
 
   return (
@@ -57,6 +62,7 @@ const Authpage = () => {
           children={"Sign in"}
           title={"Sign in"}
           className="auth-button"
+          loading={loading}
         />
         <TextLLight className="auth-question">
           Don't have an account yet?
