@@ -1,0 +1,13 @@
+.home-component {
+  background-color: var(--blue-25);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
