@@ -1,0 +1,22 @@
+.auth-component {
+  background-color: var(--blue-25);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .auth-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .auth-title {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      color: var(--blue-700);
+    }
+    .auth-button {
+      margin: 10px 0;
+    }
+  }
+}

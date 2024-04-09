@@ -10,6 +10,8 @@ import {
 } from "../../components/shared/typography/Typography";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 
+import "./AuthPage.scss";
+
 const Authpage = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -34,34 +36,38 @@ const Authpage = () => {
   };
 
   return (
-    <>
-      <TextLSemibold>Auth</TextLSemibold>
-      <Input
-        title="Email Address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="email"
-      />
-      <Input
-        title="Password"
-        value={pass}
-        onChange={(e) => setPass(e.target.value)}
-        placeholder="password"
-        type="password"
-      />
-      <Button
-        onClick={() => handleLogin(email, pass)}
-        children={"Sign in"}
-        title={"Sign in"}
-      />
-      <TextLLight>Don't have an account yet?</TextLLight>
-      <Button
-        styleType="transparent"
-        onClick={() => {}}
-        children={<Link to="/signup">Create Account</Link>}
-        title="create account"
-      />
-    </>
+    <div className="auth-component">
+      <div className="auth-content">
+        <TextLSemibold className="auth-title">Authorization</TextLSemibold>
+        <Input
+          title="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="email"
+        />
+        <Input
+          title="Password"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+          placeholder="password"
+          type="password"
+        />
+        <Button
+          onClick={() => handleLogin(email, pass)}
+          children={"Sign in"}
+          title={"Sign in"}
+          className="auth-button"
+        />
+        <TextLLight>Don't have an account yet?</TextLLight>
+        <Button
+          styleType="transparent"
+          onClick={() => {}}
+          children={<Link to="/signup">Create Account</Link>}
+          title="create account"
+          className="auth-button"
+        />
+      </div>
+    </div>
   );
 };
 
