@@ -58,7 +58,9 @@ const Authpage = () => {
           title={"Sign in"}
           className="auth-button"
         />
-        <TextLLight>Don't have an account yet?</TextLLight>
+        <TextLLight className="auth-question">
+          Don't have an account yet?
+        </TextLLight>
         <Button
           styleType="transparent"
           onClick={() => {}}
