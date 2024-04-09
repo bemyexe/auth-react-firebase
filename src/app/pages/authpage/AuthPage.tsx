@@ -2,22 +2,22 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/shared/input/Input";
 import { useState } from "react";
 import Button from "../../components/shared/button/Button";
-import { useDispatch } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../store/slices/user-slices";
 import {
   TextLLight,
   TextLSemibold,
 } from "../../components/shared/typography/Typography";
+import { useAppDispatch } from "../../hooks/redux-hooks";
 
 const Authpage = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleLogin = (email: any, password: any) => {
+  const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
@@ -25,7 +25,7 @@ const Authpage = () => {
           setUser({
             email: user.email,
             id: user.uid,
-            token: user.accessToken,
+            token: user.refreshToken,
           })
         );
         navigate("/home");
