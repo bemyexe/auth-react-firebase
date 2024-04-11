@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Authpage from "./app/pages/authpage/AuthPage.tsx";
 import Homepage from "./app/pages/homepage/HomePage.tsx";
 import SignUp from "./app/pages/signuppage/SignUpPage.tsx";
@@ -12,6 +16,7 @@ import "./firebase.js";
 import "./styles/global-styles.scss";
 import "./styles/colors.scss";
 import SecuredRoute from "./app/routes/secured-routes/SecuredRoute.tsx";
+import { getAuth } from "firebase/auth";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "signup",
     element: <SignUp />,
+  },
+  {
+    path: "*",
+    element: <Navigate to={getAuth() ? "home" : "/auth"} replace />,
   },
 ]);
 
