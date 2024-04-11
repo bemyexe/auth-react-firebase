@@ -4,4 +4,4 @@ npm run dev
 
 ## TODO
 
-- email/password validation
+- sign up validation
