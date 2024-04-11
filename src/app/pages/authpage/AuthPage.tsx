@@ -11,34 +11,48 @@ import {
 import { useAppDispatch } from "../../hooks/redux-hooks";
 
 import "./AuthPage.scss";
+import { useFormik } from "formik";
+import { LoginValidationSchema } from "../../components/shared/dto/AuthDto";
 
 const Authpage = () => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
-  const handleLogin = (email: string, password: string) => {
-    setLoading(true);
-    setTimeout(() => {
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, email, password)
-        .then(({ user }) => {
-          dispatch(
-            setUser({
-              email: user.email,
-              id: user.uid,
-              token: user.refreshToken,
-            })
-          );
-          navigate("/home");
-        })
-        .catch(console.error)
-        .finally(() => setLoading(false));
-    }, 1000);
-  };
+  const { values, handleChange, handleSubmit, errors } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      try {
+        setLoading(true);
+        setError("");
+        const auth = getAuth();
+        const res = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        dispatch(
+          setUser({
+            email: res.user.email,
+            id: res.user.uid,
+            token: res.user.refreshToken,
+          })
+        );
+        navigate("/home");
+      } catch {
+        setError("Неверный логин или пароль");
+      } finally {
+        setLoading(false);
+      }
+    },
+    validationSchema: LoginValidationSchema,
+    validateOnChange: true,
+  });
 
   return (
     <div className="auth-component">
@@ -46,19 +60,26 @@ const Authpage = () => {
         <TextLSemibold className="auth-title">Authorization</TextLSemibold>
         <Input
           title="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={(e) => handleChange("email")(e)}
           placeholder="email"
         />
+        {errors.email && (
+          <TextLLight className="errors-text">{errors.email}</TextLLight>
+        )}
         <Input
           title="Password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          value={values.password}
+          onChange={(e) => handleChange("password")(e)}
           placeholder="password"
           type="password"
         />
+        {errors.password && (
+          <TextLLight className="errors-text">{errors.password}</TextLLight>
+        )}
+        <TextLLight className="errors-text">{error}</TextLLight>
         <Button
-          onClick={() => handleLogin(email, pass)}
+          onClick={() => handleSubmit()}
           children={"Sign in"}
           title={"Sign in"}
           className="auth-button"
